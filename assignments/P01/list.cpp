@@ -8,14 +8,41 @@ using namespace std;
 //struct of nodes for the list
 
 struct empdata{
-    string emp_id, first_name, last_name, gender, email;
+    string emp_id; 
+    string first_name;
+    string last_name;
+    string gender;
+    string email;
     double hourly_pay;
+    empdata *Next;
+
+    empdata(){
+        emp_id = "";
+        first_name = "";
+        last_name = "";
+        gender = "";
+        email = "";
+        hourly_pay = 0.0;
+    }
+    empdata(string id,string first,string last,string sex,string mail, double pay){
+        emp_id = id;
+        first_name = first;
+        last_name = last;
+        gender = sex;
+        email = mail;
+        hourly_pay = pay;
+    }
 };
 
-struct Node{
+/*struct Node{
     empdata data;
     Node* Next = NULL; //creates pointer Next
-};
+    Node(empdata a){
+
+        data = a;
+        Next = NULL;
+    }
+}; */
 
 void menu(){
     int choice;
@@ -36,15 +63,17 @@ void menu(){
 }
 
 class LinkedList{
-    Node* Head; //creates node called Head that will point to the first node
-
+    empdata* Head; //creates node called Head that will point to the first node
+    empdata* Tail;
 public:
     LinkedList(){
         Head = NULL; //sets Head to null bc it's not pointing to anything
+        Tail = NULL;
     }
   
-  void push(){
-        Node* Temp = new Node(); //creates new node called Temp
+  void push(string id,string first,string last,string sex,string mail, double pay){
+        
+        empdata* Temp = new empdata(id, first, last, sex, mail, pay); //creates new node called Temp
 
         if(Head == NULL){ //if Head isn't pointing to anything
             Head = Temp; //assigns temp to be the first node
@@ -52,47 +81,78 @@ public:
             Temp->Next = Head; //makes Temp's next value equal Head?? does it make Head null??
             Head = Temp; //Head equals temp
         }
-  }
+  };
 
-void pop(empdata x){
-}
+void pop(empdata* a, string id,string first,string last,string sex,string mail, double pay){
+   empdata a;//creates new node called Temp
+   Head = a->Next;
+   delete a;
+   cout <<Head->emp_id<<", "<<Head->first_name<<", "<<Head->last_name<<", "
+        <<Head->email<<", "<<Head->gender<<", "<<Head->hourly_pay<<endl;
 
-void find(string micro, empdata a){
+};
+
+/*void find(string email){
+   empdata* Temp = Head;
+    string macro, micro;
+    cout << "Which email address are you looking for? ";
+    cin >> micro;
+    
+    do{
+        macro = Temp->email;
+
+    }while(substringMatch(string macro, string micro))
+
+    bool substringMatch(string macro, string micro){
+    return (macro.find(micro) != std::string::npos);
+
    
-    ifstream fin;       // get a stream variable
-    fin.open("employees.dat");
-    string macro;
+};*/
 
-    while(!fin.eof())
-    {
-        fin >> macro;
-        if (macro.find(micro) != std::string::npos)
-            fin >> a.emp_id >> a.first_name >> a.last_name >> a.gender >> a.email;
-    }
-   
-}
+ void printid(string id /*,string first,string last,string sex,string mail, double pay*/){
+      empdata* Temp = Head;
 
- void print(){
-        Node* Temp = Head;
-        while(Temp != NULL){ //while temp isn't the end
-            cout << Temp->data; //print value of temp
-            if(Temp->Next){ //if next isn't the end
-                cout <<"->"; //print arrow
-            }
-            Temp = Temp->Next;
-        }
-    };
+        for(int i = 0; i < 30; i++){
+            cout<<Temp->emp_id<<"\n";
+            if(Temp->Next){
+             Temp = Temp-> Next;
+              Tail = Temp->Next;
+            };
+        };
+            
+     };
 };
 
 
 
 int main(){
-    string search;
-    empdata employee;
+ 
+ LinkedList EmpList;
+
+    string empid;
+    string first;
+    string last;
+    string email;
+    string gender;
+    double pay;
+
+    string line;
+    string *tokens;
+    ifstream fin("employees.dat");
 
 
-    void menu();
-    void print();
+    while(!fin.eof()){
+
+        fin>>empid>>first>>last>>email>>gender>>pay;
+
+       //cout<<empid<<", "<<first<<", "<<last<<", "<<email<<", "<<gender<<", "<<pay<<endl;
+
+        EmpList.push(empid,first,last,email,gender,pay);
+    };
+
+   EmpList.pop(EmpList, empid,first,last,email,gender,pay);
+ //EmpList.printid(empid);
 
 
-}
+
+};
