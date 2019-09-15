@@ -74,12 +74,10 @@ void find(string micro, empdata a){
 
  void print(){
         Node* Temp = Head;
-        ofstream outfile;
-        outfile.open("outfile.txt");
         while(Temp != NULL){ //while temp isn't the end
-            outfile << Temp->data; //print value of temp
+            cout << Temp->data; //print value of temp
             if(Temp->Next){ //if next isn't the end
-                outfile <<"->"; //print arrow
+                cout <<"->"; //print arrow
             }
             Temp = Temp->Next;
         }
