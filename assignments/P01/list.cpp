@@ -100,7 +100,7 @@ void find(string email){
     
     do{
         macro = Temp->email;
-
+        cout << macro << "\n";
     }while(!(macro.find(micro) != std::string::npos));
 
     if (macro.find(micro) != std::string::npos)
