@@ -94,19 +94,22 @@ void pop(string id,string first,string last,string sex,string mail, double pay){
 
 void find(string email){
    empdata* Temp = Head;
+   empdata* Result = Head;
     string macro, micro;
     cout << "Which email address are you looking for? ";
     cin >> micro;
     
     do{
+        
         macro = Temp->email;
+        Result = Temp;
+        Temp = Temp->Next;
         cout << macro << "\n";
     }while(!(macro.find(micro) != std::string::npos));
 
     if (macro.find(micro) != std::string::npos)
         cout << "Found!\n";
-        cout <<Head->emp_id<<", "<<Head->first_name<<", "<<Head->last_name<<", "
-             <<Head->email<<", "<<Head->gender<<", "<<Head->hourly_pay<<endl;
+        cout <<Result->email<<endl;
    
 };
 
