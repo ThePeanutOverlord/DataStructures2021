@@ -87,12 +87,37 @@ void pop(string id,string first,string last,string sex,string mail, double pay){
    empdata* Temp = Head;//creates new node called Temp
    Head = Temp->Next;
    delete Temp;
-   cout <<Head->emp_id<<", "<<Head->first_name<<", "<<Head->last_name<<", "
-       <<Head->email<<", "<<Head->gender<<", "<<Head->hourly_pay<<endl;
+  // cout <<Head->emp_id<<", "<<Head->first_name<<", "<<Head->last_name<<", "
+//       <<Head->email<<", "<<Head->gender<<", "<<Head->hourly_pay<<endl;
 
 };
+void del(string id){
+   empdata* Temp = Head;//creates new node called Temp
+   empdata* del;
+    string macro, micro;
+    cout << "Enter the ID of the employee you wish to delete: ";
+    cin >> micro;
+  do{
+   Head = Temp; 
+   cout << Head->emp_id << "\n";
+     del = Temp->Next;
+     cout << del->emp_id << "\n";
+    Temp = Temp->Next->Next;
+    cout << Temp->emp_id << "\n";
+    macro = del->emp_id;
+    if(Temp->Next=NULL){
+        cout << "Employee not found\n";
+    }
+  }while(!macro.find(micro) != std::string::npos);
+    cout << "Out of loop\n";
+    delete del;
+   
+};
+   
 
-void find(string email){
+
+
+empdata find(string email){
    empdata* Temp = Head;
    empdata* Result = Head;
     string macro, micro;
@@ -104,14 +129,35 @@ void find(string email){
         macro = Temp->email;
         Result = Temp;
         Temp = Temp->Next;
-        cout << macro << "\n";
-    }while(!(macro.find(micro) != std::string::npos));
-
-    if (macro.find(micro) != std::string::npos)
-        cout << "Found!\n";
-        cout <<Result->email<<endl;
-   
+         if (Temp->Next=NULL){
+             cout << "Not found\n";
+         }
+         
+    }while(!macro.find(micro) != std::string::npos);
+    return *Result;
 };
+
+/*bool find(string email){
+    empdata* Temp = Head;
+   bool result= 0;
+    string macro, micro;
+    cout << "Which email address are you looking for? ";
+    cin >> micro;
+    
+    do{
+        
+        macro = Temp->email;
+        Temp = Temp->Next;
+        if (macro.find(micro) != std::string::npos){
+             cout << "Found!\n";
+            result = 1;
+         }
+   }while(Temp->Next!=NULL);
+
+   return result;
+   
+};*/
+
 
  void printid(string id /*,string first,string last,string sex,string mail, double pay*/){
       empdata* Temp = Head;
@@ -152,9 +198,10 @@ int main(){
 
         EmpList.push(empid,first,last,email,gender,pay);
     };
-    EmpList.find(email);
+   //cout << EmpList.find(email).email;
    //EmpList.pop(empid,first,last,email,gender,pay);
     //EmpList.printid(empid);
+    EmpList.del(empid);
 
-
+return 0;
 };
