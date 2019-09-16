@@ -83,16 +83,16 @@ public:
         }
   };
 
-void pop(empdata* a, string id,string first,string last,string sex,string mail, double pay){
-   empdata a;//creates new node called Temp
-   Head = a->Next;
-   delete a;
+void pop(string id,string first,string last,string sex,string mail, double pay){
+   empdata* Temp = Head;//creates new node called Temp
+   Head = Temp->Next;
+   delete Temp;
    cout <<Head->emp_id<<", "<<Head->first_name<<", "<<Head->last_name<<", "
-        <<Head->email<<", "<<Head->gender<<", "<<Head->hourly_pay<<endl;
+       <<Head->email<<", "<<Head->gender<<", "<<Head->hourly_pay<<endl;
 
 };
 
-/*void find(string email){
+void find(string email){
    empdata* Temp = Head;
     string macro, micro;
     cout << "Which email address are you looking for? ";
@@ -101,13 +101,14 @@ void pop(empdata* a, string id,string first,string last,string sex,string mail, 
     do{
         macro = Temp->email;
 
-    }while(substringMatch(string macro, string micro))
+    }while(!(macro.find(micro) != std::string::npos));
 
-    bool substringMatch(string macro, string micro){
-    return (macro.find(micro) != std::string::npos);
-
+    if (macro.find(micro) != std::string::npos)
+        cout << "Found!\n";
+        cout <<Head->emp_id<<", "<<Head->first_name<<", "<<Head->last_name<<", "
+             <<Head->email<<", "<<Head->gender<<", "<<Head->hourly_pay<<endl;
    
-};*/
+};
 
  void printid(string id /*,string first,string last,string sex,string mail, double pay*/){
       empdata* Temp = Head;
@@ -116,7 +117,6 @@ void pop(empdata* a, string id,string first,string last,string sex,string mail, 
             cout<<Temp->emp_id<<"\n";
             if(Temp->Next){
              Temp = Temp-> Next;
-              Tail = Temp->Next;
             };
         };
             
@@ -149,10 +149,9 @@ int main(){
 
         EmpList.push(empid,first,last,email,gender,pay);
     };
-
-   EmpList.pop(EmpList, empid,first,last,email,gender,pay);
- //EmpList.printid(empid);
-
+    EmpList.find(email);
+   //EmpList.pop(empid,first,last,email,gender,pay);
+    //EmpList.printid(empid);
 
 
 };
