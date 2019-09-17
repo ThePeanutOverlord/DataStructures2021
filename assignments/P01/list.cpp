@@ -49,7 +49,7 @@ struct empdata
         gender = "";
         email = "";
         hourly_pay = 0.0;
-    }
+    }//Paige Champagne
 
 //constructor within empdata that makes them parts of 
 //the nodes of empdata in the linkedList
@@ -104,7 +104,7 @@ bool substringMatch(string macro, string micro)
 class LinkedList
 {
     empdata *Head; //creates node called Head that will point to the first node
-
+//Paige Champagne
 public:
     LinkedList()
     {
@@ -156,7 +156,7 @@ public:
         empdata *Temp = Head; //creates new node called Temp
         Head = Temp->Next; //Makes the next node the new first
         delete Temp; //self-explanatory
-    };
+    }; //Paige Champagne
 /**
  * Constructor: void del
  * Description:
@@ -201,7 +201,7 @@ public:
             cout << "Not found.\n";
         }
             
-    };
+    }; //Paige Champagne
 /**
  * Constructor: void printid
  * Description:
@@ -229,7 +229,7 @@ public:
             };
         };
               fout.close();
-    };
+    }; //Paige Champagne
 /**
  * Constructor: bool find
  * Description:
@@ -272,7 +272,7 @@ public:
             return found;   //return if search was found or not
         };
     
-};
+}; //Paige Champagne
 
 /**
  *Function: int main
@@ -344,4 +344,4 @@ public:
         };
         
         return 0;
-    }
+    } //Paige Champagne
