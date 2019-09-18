@@ -49,6 +49,7 @@ struct empdata
         gender = "";
         email = "";
         hourly_pay = 0.0;
+        Next = NULL;
     }//Paige Champagne
 
 //constructor within empdata that makes them parts of 
@@ -82,7 +83,7 @@ struct empdata
 bool substringMatch(string macro, string micro)
 {
     return (macro.find(micro) != std::string::npos);
-};
+}
 /**
  * Class: LinkedList
  * Description:
@@ -137,7 +138,7 @@ public:
             Temp->Next = Head; //make it = to Temp->Next
             Head = Temp;       //Head equals temp
         }
-    };
+    }
 /**
  * Constructor: void pop
  * Description:
@@ -153,10 +154,15 @@ public:
     void pop(string id, string first, string last, 
              string sex, string mail, double pay)
     {
-        empdata *Temp = Head; //creates new node called Temp
+       if(Head != NULL){
+           empdata *Temp = Head; //creates new node called Temp
         Head = Temp->Next; //Makes the next node the new first
         delete Temp; //self-explanatory
-    }; //Paige Champagne
+       } else if(Head == NULL){
+           cout << "Head is empty. Fill the array\n";
+       }
+        
+    } //Paige Champagne
 /**
  * Constructor: void del
  * Description:
@@ -172,18 +178,24 @@ public:
     {
         empdata *Temp = Head; //creates new node called Temp
         empdata *del; //creates node to be deleted
+        empdata *hold = Temp->Next;
         string macro, micro;
         cout << "Enter the ID of the employee you wish to delete: ";
         cin >> micro; //user choice
-        do
-        {
+
+            while(Temp->Next != NULL){//until the end of the list is reached
             if (substringMatch(macro, micro) == 1) //checks if they match
             {
                 del = Temp->Next; //moves along in the list
+                hold = Temp;
+                Temp = Temp->Next->Next;
                 macro = del->emp_id;
-                Temp = Temp->Next;
+              if(del == NULL){
+                   cout << "Not found\n";
+               }else{
                 delete del;
-                cout << "Deleted\n";
+                cout << "Deleted\n";                   
+               };
             }
             else
             {
@@ -191,17 +203,10 @@ public:
                 macro = del->emp_id;
                 Temp = Temp->Next->Next;
             };
-
-        } while (Temp->Next != NULL); //until the end of the list is reached
-
-        //if the input from the user has no match or sub
-         //string match, say it cannot be found
-        if (substringMatch(macro, micro) == 0) 
-        {
-            cout << "Not found.\n";
-        }
             
-    }; //Paige Champagne
+    }  
+
+} //Paige Champagne
 /**
  * Constructor: void printid
  * Description:
@@ -229,7 +234,7 @@ public:
             };
         };
               fout.close();
-    }; //Paige Champagne
+    } //Paige Champagne
 /**
  * Constructor: bool find
  * Description:
@@ -256,7 +261,7 @@ public:
             cout << "Which email address are you looking for? ";
             cin >> micro;
 
-            do
+            while(Temp->Next != NULL)
             {
 
                 macro = Temp->email; //gets data to check
@@ -268,7 +273,7 @@ public:
                     found = true;
                     fout << found << "\n"; //outfile 1 if found
                 }
-            } while (Temp->Next != NULL);
+            }
             return found;   //return if search was found or not
         };
     
