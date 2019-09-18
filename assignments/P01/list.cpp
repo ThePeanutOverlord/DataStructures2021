@@ -183,7 +183,8 @@ public:
         cout << "Enter the ID of the employee you wish to delete: ";
         cin >> micro; //user choice
 
-            while(Temp->Next != NULL){//until the end of the list is reached
+            while(Temp->Next->Next != NULL){//until the end of the list is reached
+           
             if (substringMatch(macro, micro) == 1) //checks if they match
             {
                 del = Temp->Next; //moves along in the list
@@ -195,17 +196,16 @@ public:
                }else{
                 delete del;
                 cout << "Deleted\n";                   
-               };
+               }
             }
             else
             {
                 del = Temp->Next; //moves along in the list
-                macro = del->emp_id;
+                hold = Temp;
                 Temp = Temp->Next->Next;
-            };
-            
-    }  
-
+                macro = del->emp_id;
+            }
+        }   
 } //Paige Champagne
 /**
  * Constructor: void printid
