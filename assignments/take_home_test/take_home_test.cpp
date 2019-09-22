@@ -1,11 +1,8 @@
 //Paige Champagne
+//Take home test 1
+//Data Structures Fall 2019
 
-/**1)**
-
-- Write a function that receives 3, 1D arrays.
-- They are all the same size.
-- It sums up the values in all arrays and returns that value.
-- Call your function `sumArrays`*/
+/******************************7******************************/
 
 int sumArrays(int a[], int b[], int c[], int size){
     int sum = 0;
@@ -15,12 +12,7 @@ int sumArrays(int a[], int b[], int c[], int size){
     return sum;
 }
 
-/**2)**
-
-- Write a function that will average integer values in a 2D array.
-- Assume the 2D array has the same width and height.
-- Name your function `avg2D`
-- Remember averaging integers does not always result in an integer.*/
+/******************************2******************************/
 
 int avg2D(int a[][], int size){
     int sum, count = 0;
@@ -35,18 +27,7 @@ int avg2D(int a[][], int size){
     return avg;
 }
 
-/**3)**
-
-Write a function that would print out the following pattern:
-
-| Parameter of 4 | Parameter of 6                   |
-| :------------- | :------------------------------- |
-| x              | x                                |
-| xx             | xx                               |
-| xxxx           | xxxx                             |
-| xxxxxxxx  //8  | xxxxxxxx                         |
-|                | xxxxxxxxxxxxxxxx                 |
-|                | xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx | */
+/******************************3******************************/
 
 void pattern(){
     int param = 6;
@@ -70,20 +51,7 @@ void pattern(){
     }
 }
 
-/**4)**
-
-```c++
-struct Stats{
-   int min;
-   int max;
-   double avg;
-   int sum;  
-};
-```
-
-- Write a function that calculates all the values in the Stats struct when given an array of integers.
-- Return your values in an instance of the struct.  
-- Name your function `aggregateVals`*/
+/******************************4******************************/
 
 Stats aggregatevals(double a[], int size){ 
     Stats x;
@@ -105,10 +73,7 @@ Stats aggregatevals(double a[], int size){
     return x;
 }
 
-/**5)**
-
-- Write a constructor for the `Stats` struct to initialize its data members with correct values. 
-- Pay attention to data types.*/
+/******************************5******************************/
 
 Stats(){
     sum = 0;
@@ -118,15 +83,7 @@ Stats(){
    } 
 
 
-/**6)** 
-
-- Write a function that computes the standard deviation for a 1D array of integers.
-- Call your function `calcStdDev`.
-- Standard Deviation:
-    1. Work out the Mean (the simple average of the numbers)
-    2. Then for each number: subtract the Mean and square the result
-    3. Then work out the mean of those squared differences.
-    4. Take the square root of that and we are done!*/
+/******************************6******************************/
 
     float calcStdDev(int a[], int size){
     float sum = 0.0;
@@ -152,11 +109,7 @@ Stats(){
 }
 
 
-/**7)**
-
-- Write a function that will dynamically allocated memory of a given size for an integer array.
-- Then it will return that new array initialized with zeros.
-- Call it `initIntArray`*/
+/******************************7******************************/
 
 int initIntArray(int size){
    int *array = new int(size);
