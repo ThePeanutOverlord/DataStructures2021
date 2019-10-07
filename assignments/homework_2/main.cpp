@@ -127,13 +127,13 @@ bool Full(){
 }
 
 int checkResize(int s, int t){
-
-if ((float)t/s >= 0.8){
-  cout << "  1" <<endl;
+cout << "t/s " << t/(float)s<<endl;
+if (t/(float)s == 0.8){
+  cout << "  enlarge" <<endl;
     return 1;
 }
-else if ((float)t/s <= 0.2){
-  cout << "  2" <<endl;
+else if (t/(float)s == 0.2){
+  cout << "  shrink" <<endl;
     return 2;
 }
 else{
