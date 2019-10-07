@@ -56,24 +56,8 @@ bool Push(int val){
   if(!Full()){
     Top++;
     A[Top] = val;
-    switch(S1.checkResize(S1.Size, S1.Top)){
-      case 1:
-       S1.Enlarge(S1.Size, S1.Top);
-        break;
-      case 2:
-       S1.Reduce(S1.Size, S1.Top);
-        break;
-    }
     return true;
   }else{
-    switch(S1.checkResize(S1.Size, S1.Top)){
-      case 1:
-       S1.Enlarge(S1.Size, S1.Top);
-        break;
-      case 2:
-       S1.Reduce(S1.Size, S1.Top);
-        break;
-    }
     return false;
   }
 }
@@ -97,14 +81,6 @@ int Pop(){
     // should return a value that implies failuer, but good enough for now
     cout<<"Cannot remove item from empty stack"<<endl;
   }
-  switch(S1.checkResize(S1.Size, S1.Top)){
-      case 1:
-       S1.Enlarge(S1.Size, S1.Top);
-        break;
-      case 2:
-       S1.Reduce(S1.Size, S1.Top);
-        break;
-    }
   return 0;
 }
 
@@ -167,7 +143,7 @@ else{
 }
 
 void Enlarge(int s, int t){
-   s = s*1.5;
+   Size = s*1.5;
    int *b = new int [s];
 
    for(int i = 0; i < t; i++){
@@ -180,7 +156,7 @@ void Enlarge(int s, int t){
 }
 
 void Reduce(int s, int t){
- s = s*0.5;
+ Size = s*0.5;
    int *b = new int [s];
 
    for(int i = 0; i < t; i++){
@@ -189,7 +165,7 @@ void Reduce(int s, int t){
   cout << s <<endl;
     delete A;
     A = b;
-   // return *b;
+    //return *b;
 }
 };
 
