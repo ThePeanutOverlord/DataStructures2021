@@ -142,7 +142,7 @@ else{
 }
 }
 
-Stack Enlarge(int &s, int t){
+Stack Enlarge(int s, int t){
    s = s*1.5;
    int *b = new int [s];
 
@@ -151,6 +151,7 @@ Stack Enlarge(int &s, int t){
    }
    cout << s <<endl;
     delete A;
+    A = b;
     return *b;
 }
 
@@ -163,6 +164,7 @@ Stack Reduce(int s, int t){
    }
   cout << s <<endl;
     delete A;
+    A = b;
     return *b;
 }
 };
@@ -196,10 +198,10 @@ while (!fin.eof()){
  // S1.checkResize(Stack)
     switch(S1.checkResize(S1.Size, S1.Top)){
       case 1:
-       S1 = S1.Enlarge(S1.Size, S1.Top);
+       S1.Enlarge(S1.Size, S1.Top);
         break;
       case 2:
-       S1 = S1.Reduce(S1.Size, S1.Top);
+       S1.Reduce(S1.Size, S1.Top);
         break;
     }
   //cout << size <<endl;
