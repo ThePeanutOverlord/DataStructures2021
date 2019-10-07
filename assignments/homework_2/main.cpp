@@ -142,7 +142,7 @@ else{
 }
 }
 
-Stack Enlarge(int s, int t){
+void Enlarge(int s, int t){
    s = s*1.5;
    int *b = new int [s];
 
@@ -152,10 +152,10 @@ Stack Enlarge(int s, int t){
    cout << s <<endl;
     delete A;
     A = b;
-    return *b;
+   // return *b;
 }
 
-Stack Reduce(int s, int t){
+void Reduce(int s, int t){
  s = s*0.5;
    int *b = new int [s];
 
@@ -165,7 +165,7 @@ Stack Reduce(int s, int t){
   cout << s <<endl;
     delete A;
     A = b;
-    return *b;
+   // return *b;
 }
 };
 
