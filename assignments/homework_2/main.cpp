@@ -128,12 +128,12 @@ bool Full(){
 
 int checkResize(int s, int t){
 
-if (t/s == 0.8){
+if ((float)t/s >= 0.8){
   cout << "  1" <<endl;
     return 1;
 }
-else if (t/s == 0.2){
-  cout << "  1" <<endl;
+else if ((float)t/s <= 0.2){
+  cout << "  2" <<endl;
     return 2;
 }
 else{
@@ -142,9 +142,9 @@ else{
 }
 }
 
-Stack Enlarge(int s, int t){
+Stack Enlarge(int &s, int t){
    s = s*1.5;
-   Stack *b = new Stack [s];
+   int *b = new int [s];
 
    for(int i = 0; i < t; i++){
        b[i] = A[i];
@@ -156,7 +156,7 @@ Stack Enlarge(int s, int t){
 
 Stack Reduce(int s, int t){
  s = s*0.5;
-   Stack *b = new Stack [s];
+   int *b = new int [s];
 
    for(int i = 0; i < t; i++){
        b[i] = A[i];
@@ -192,17 +192,17 @@ while (!fin.eof()){
       S1.Pop();
       break;
     }
-  //S1.Print();
+  S1.Print();
  // S1.checkResize(Stack)
-    switch(S1.checkResize(size, S1.Top)){
+    switch(S1.checkResize(S1.Size, S1.Top)){
       case 1:
-       S1 = S1.Enlarge(size, S1.Top);
+       S1 = S1.Enlarge(S1.Size, S1.Top);
         break;
       case 2:
-       S1 = S1.Reduce(size, S1.Top);
+       S1 = S1.Reduce(S1.Size, S1.Top);
         break;
     }
-  cout << size <<endl;
+  //cout << size <<endl;
 }
   
   return 0;
