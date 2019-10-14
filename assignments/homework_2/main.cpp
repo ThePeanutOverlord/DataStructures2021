@@ -107,7 +107,7 @@ struct Stack
   void Print(int biggest)
   {
     ofstream outfile; //opens file
-    outfile.open ("output.dat");
+    outfile.open ("stack_out.dat");
 
     outfile << "Paige Champagne\n";
     outfile << "10/5/19\n";
@@ -121,7 +121,7 @@ struct Stack
     {
       outfile << A[i] << " ";
     }
-    
+    outfile.close(); //closes output file
   }
 
   /**
