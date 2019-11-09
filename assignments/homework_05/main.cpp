@@ -1,3 +1,8 @@
+/* Paige Champagne
+*  Homework 05
+*  Ordering a list of strings
+*/
+
 #include <iostream>
 #include <string>
 #include <fstream>
