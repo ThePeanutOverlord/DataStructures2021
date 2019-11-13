@@ -20,11 +20,12 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <cstring>
 
 using namespace std;
 
 struct Node{
-    char *digit; //i made it a string for test purposes but tbh it should be a char
+    char *digit;
     Node *Next;
     Node *Prev;
 
@@ -44,7 +45,7 @@ class Num{
         First = NULL;
         //Last = NULL;
     }
-   void pushnum(string a[]){ //@ end call method to sub 48
+   void pushnum(string* a){ //@ end call method to sub 48
        int count = 0;
        char *b;
        Node *Temp = First;
@@ -63,6 +64,7 @@ class Num{
         }while(count < 100);
    }
     
+
 };
 
 /*string convert(string a){
@@ -97,7 +99,7 @@ Num poop;
  }*/
 
  fin >> op;
- fin >> n1; //maybe use getline?????????
+ istream& getline (istream&  is, string& n1); //maybe use getline?????????
  cout << n1 <<endl;
 poop.pushnum(n1);
 return 0;
