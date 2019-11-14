@@ -24,17 +24,15 @@
 
 using namespace std;
 /**
- * Swap
+ * Node
  * 
  * Description:
- *      Adds to doubly linked lists together.
+ *      makes up the doubly linked list
  * 
  * Params:
- *      string val1 : A string representation of an integer number.
- *      string val2 : A string representation of an integer number.
- * 
- * Returns:
- *      Node* : a list with addition results
+ *      char d: character from string in file
+ *      Node* a: node for arithmetic
+ *
  */
 struct Node{
     int digit;
@@ -58,17 +56,16 @@ struct Node{
     }
 };
 /**
- * Swap
+ * Num
  * 
  * Description:
- *      Adds to doubly linked lists together.
+ *      class for the doubly linked list
  * 
  * Params:
- *      string val1 : A string representation of an integer number.
- *      string val2 : A string representation of an integer number.
- * 
- * Returns:
- *      Node* : a list with addition results
+ *      made up of Nodes
+ * Contains:
+ *      constructor, pushnums, add, sub, mul, printresult
+ *
  */
 class Num{
     private:
@@ -252,7 +249,6 @@ class Num{
         fout << temp->digit <<endl;
     }
 
-    
 
  /**
  * Swap
@@ -283,7 +279,17 @@ class Num{
 };
 
 
-
+/**
+ * main
+ * 
+ * Description:
+ *      main function
+ * 
+ * Params:
+ * 
+ * Returns:
+ *      0
+ */
 int main(){
 Num p;
 Num q;
