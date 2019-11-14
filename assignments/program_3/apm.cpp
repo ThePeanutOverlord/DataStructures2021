@@ -23,85 +23,306 @@
 #include <cstring>
 
 using namespace std;
-
+/**
+ * Swap
+ * 
+ * Description:
+ *      Adds to doubly linked lists together.
+ * 
+ * Params:
+ *      string val1 : A string representation of an integer number.
+ *      string val2 : A string representation of an integer number.
+ * 
+ * Returns:
+ *      Node* : a list with addition results
+ */
 struct Node{
-    char digit;
+    int digit;
     Node *Next;
     Node *Prev;
 
     Node(char d){
-        digit = d;
+        digit = d - 48;
+        Next = NULL;
+        Prev = NULL;
+    }
+   Node(Node* a){
+        digit = a->digit;
+        Next = a->Next;
+        Prev = a->Prev;
+    }
+    Node(int g){
+        digit = g;
         Next = NULL;
         Prev = NULL;
     }
 };
-
+/**
+ * Swap
+ * 
+ * Description:
+ *      Adds to doubly linked lists together.
+ * 
+ * Params:
+ *      string val1 : A string representation of an integer number.
+ *      string val2 : A string representation of an integer number.
+ * 
+ * Returns:
+ *      Node* : a list with addition results
+ */
 class Num{
     private:
         Node* First;
-       // Node *Last;
+        Node* Last;
+        int count;
     public:
+    Node* F = First;
+    Node* L = Last;
     Num(){
         First = NULL;
-        //Last = NULL;
+        Last = NULL;
+        count = 0;
     }
+ /**
+ * pushnum
+ * 
+ * Description:
+ *      pushes digits onto the list
+ * 
+ * Params:
+ *      string val1 : A string representation of an integer number.
+ * 
+ * Returns:
+ *      void
+ */
    void pushnum(string a){ //@ end call method to sub 48
-       int count = 0;
-       char b;
-       Node *Temp = First;
-       cout <<"fuuuuuuuuuuuuuuuck";
         do{
-            b = a[count];
-            Node* newt = new Node(b);
-            cout << newt->digit << " ";
-            Temp = newt;
-            Temp->Prev = Temp;
-            Temp = Temp->Next;
-            cout << "Previous: " << Temp->Prev->digit << " ";
-            cout << "Current: " << Temp->digit << " ";
-
+       Node *Temp = new Node(a[count]);          
+       if(!First){
+        First = Temp;
+        Last = Temp;
+        Last->Prev = First;
+        Last->Next = First;
+        First->Prev = Last;
+        First->Next = Last;
+       } else{
+        Temp->Prev = First;
+        Temp->Next = Last;
+        First->Next = Temp;
+        Last->Prev = Temp;
+        Last = Temp;
+         }
            count++;
-        }while(count < 100);
+        }while(a[count] != 0);
    }
+   /**
+ * pushnum
+ * 
+ * Description:
+ *      pushes digits onto the list
+ * 
+ * Params:
+ *      integer a: int form of digits in a node
+ * 
+ * Returns:
+ *      void
+ */
+   void pushnum(int a){ //@ end call method to sub 48
+        do{
+       Node *Temp = new Node(a);           
+       if(!First){
+        First = Temp;
+        Last = Temp;
+        Last->Prev = First;
+        Last->Next = First;
+        First->Prev = Last;
+        First->Next = Last;
+       } else{
+        Temp->Prev = First;
+        Temp->Next = Last;
+        First->Next = Temp;
+        Last->Prev = Temp;
+        Last = Temp;
+         }
+           count++;
+        }while(a != 0);
+   }
+ /**
+ * Add
+ * 
+ * Description:
+ *      Adds to doubly linked lists together.
+ * 
+ * Params:
+ *      Node* b: supposedly points at n2 from main
+ * 
+ * Returns:
+ *      Node* result: a list with addition results
+ */  
+    Node* Add(Node* b){
+    Node* Temp = new Node(Last->digit);
+    Num c;
+    int i = 0;
+        while(Temp != First){
+           i = Temp->digit + b->digit;
+           while(i > 9){
+             Temp = Temp->Prev;  
+            i= Temp->digit += i%9;
+           };
+            c.pushnum(i);            
+        }
+    Node* result = c.First;
+    return result;
+    };
+/**
+ * Sub
+ * 
+ * Description:
+ *       subtracts one doubly linked list from another.
+ * 
+ * Params:
+ *      Node* b: supposedly points at n2 from main
+ * 
+ * Returns:
+ *      Node* : a list with subtraction results
+ */
+    Node* Sub(Node* b){
+        Node* Temp = new Node(Last->digit);
+    Num c;
+    int i = 0;
+        while(Temp != First){
+           i = Temp->digit - b->digit;
+           while(i > 9){
+             Temp = Temp->Prev;  
+            i= Temp->digit += i%9;
+           };
+            c.pushnum(i);            
+        }
+    Node* result = c.First;
+    return result;
+    }
+ /**
+ * Mul
+ * 
+ * Description:
+ *      multiplies two doubly linked lists together.
+ * 
+ * Params:
+ *      Node* b: supposedly points at n2 from main
+ * 
+ * Returns:
+ *      Node* : a list with multiplication results
+ */
+    Node* Mul(Node* b){
+     Node* Temp = new Node(Last->digit);
+    Num c;
+    int i = 0;
+        while(Temp != First){
+           i = Temp->digit * b->digit;
+           while(i > 9){
+             Temp = Temp->Prev;  
+            i= Temp->digit += i%9;
+           };
+            c.pushnum(i);            
+        }
+    Node* result = c.First;
+    return result;
+    }
+/**
+ * PrintResult
+ * 
+ * Description:
+ *      prints results of arithmetic to outfile output.num
+ * 
+ * Params:
+ *     Node* answer: supposedly points at n2 from main
+ * 
+ * Returns:
+ *      Node* : a list with addition results
+ */
+    void PrintResult(Node* answer){
+        ofstream fout ("output.num");
+         Node *temp = First;
+
+        while (temp != Last)
+        {   
+            fout << temp->digit;
+            temp = temp->Prev;
+        }
+        fout << temp->digit <<endl;
+    }
+
     
+
+ /**
+ * Swap
+ * 
+ * Description:
+ *      Adds to doubly linked lists together.
+ * 
+ * Params:
+ *      string val1 : A string representation of an integer number.
+ *      string val2 : A string representation of an integer number.
+ * 
+ * Returns:
+ *      Node* : a list with addition results
+ */
+    void Print()
+    {   
+        Node *temp = First;
+
+        while (temp != Last)
+        {   
+            cout << temp->digit;
+            temp = temp->Prev;
+        }
+        cout << temp->digit <<endl;
+        cout <<endl<<endl;
+    }
 
 };
 
-/*void convert(){
-    Node* Temp = First;
-    int count = 0;
-    while(Temp != NULL){
-        Temp->digit += 48;
-        Temp = Temp->Next;
-    }
-}*/
+
 
 int main(){
+Num p;
+Num q;
+Num r;
 ifstream fin ("input_data.txt");
 int count;
 char op;
 string n1;
 string n2;
-Num p;
+
 
  fin >> count;
-/*
- for(int i = 0; i < count; i++){
-    fin << op;
-    fin << n1;
-    fin << n2;
-    //push num1 and num2 here
-    switch(op){
-        case '+':
-            //
-            break;
-    }
- }*/
 
- fin >> op;
- //istream& getline (istream&  is, string& n1); //maybe use getline?????????
- fin >> n1;
- cout << n1 <<endl;
- p.pushnum(n1);
+ for(int i = 0; i < count; i++){
+    fin >> op;
+    fin >> n1;
+    fin >> n2;
+    p.pushnum(n1);
+    //p.Print();    
+    q.pushnum(n2);
+    //q.Print();    
+    Node* x = new Node(q.F);
+    switch(op){
+        case '+':{
+            p.PrintResult(p.Add(x));
+           break;
+        }
+        case '-':{
+            p.PrintResult(p.Sub(x));
+            break;
+        }
+        case '*':{
+            p.PrintResult(p.Mul(x));
+            break;
+        }
+           
+    
+    }
+ };
+
 return 0;
 }
