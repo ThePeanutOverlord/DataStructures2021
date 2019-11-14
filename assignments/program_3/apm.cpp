@@ -38,7 +38,7 @@ struct Node{
 
 class Num{
     private:
-        Node *First;
+        Node* First;
        // Node *Last;
     public:
     Num(){
@@ -81,8 +81,8 @@ ifstream fin ("input_data.txt");
 int count;
 char op;
 string n1;
-string* n2;
-Num poop;
+string n2;
+Num p;
 
  fin >> count;
 /*
@@ -99,8 +99,9 @@ Num poop;
  }*/
 
  fin >> op;
- istream& getline (istream&  is, string& n1); //maybe use getline?????????
+ //istream& getline (istream&  is, string& n1); //maybe use getline?????????
+ fin >> n1;
  cout << n1 <<endl;
-poop.pushnum(n1);
+ p.pushnum(n1);
 return 0;
 }
