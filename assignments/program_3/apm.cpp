@@ -25,11 +25,11 @@
 using namespace std;
 
 struct Node{
-    char *digit;
+    char digit;
     Node *Next;
     Node *Prev;
 
-    Node(char *d){
+    Node(char d){
         digit = d;
         Next = NULL;
         Prev = NULL;
@@ -45,9 +45,9 @@ class Num{
         First = NULL;
         //Last = NULL;
     }
-   void pushnum(string* a){ //@ end call method to sub 48
+   void pushnum(string a){ //@ end call method to sub 48
        int count = 0;
-       char *b;
+       char b;
        Node *Temp = First;
        cout <<"fuuuuuuuuuuuuuuuck";
         do{
@@ -67,20 +67,20 @@ class Num{
 
 };
 
-/*string convert(string a){
+/*void convert(){
+    Node* Temp = First;
     int count = 0;
-    while(a[count] != ){
-        a[count]+= 48;
-        count++;
+    while(Temp != NULL){
+        Temp->digit += 48;
+        Temp = Temp->Next;
     }
-    return a;
 }*/
 
 int main(){
 ifstream fin ("input_data.txt");
 int count;
 char op;
-string* n1;
+string n1;
 string* n2;
 Num poop;
 
