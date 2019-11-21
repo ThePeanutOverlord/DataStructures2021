@@ -1,12 +1,12 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-// Author:           Terry Griffin
+// Author:           Paige Champagne
 // Assignment:       Program_03
 // Date:             14 November 2019
 // Description:
-//       This file is an implementation of a doubly linked list of integers.
-// 
-//       Feel free to use and alter or destroy. Do what you like with this code.
+//       This program reads in unecessarily long numbers from an imput file
+//       and makes them into a doubly linked list of ints with operations for
+//       addition, subtraction, and multiplication.
 //
 /////////////////////////////////////////////////////////////////////////////////
 #include <iostream>
@@ -60,7 +60,16 @@ BigNum::BigNum() {
     Head = Tail = NULL;
     Count = 0;
 }
-
+/**
+ * string constructor
+ * 
+ *  takes string read in from main and puts in list while
+ *  converting to int
+ * @Params:
+ * 
+ *     string number (long number from file)
+ 
+ */
 BigNum::BigNum(string number) {
     Head = Tail = NULL;
     Count = 0;
@@ -68,7 +77,6 @@ BigNum::BigNum(string number) {
 
   for(int i=0;i<number.size();i++){
     digit = number[i]-48;
-   // cout << digit;
        InsertBack(digit);
        Count++;
 
@@ -134,7 +142,7 @@ void BigNum::InsertFront(int data) {
         Temp->Next = Head;
         Head = Temp;
     }
-    cout << "inserted:" << Temp->data<< endl;
+
 }
 
 /**
@@ -183,9 +191,6 @@ void BigNum::Print() {
 
     while (Temp) {
         cout << Temp->data;
-        if (Temp->Next) {
-           // cout << "->";
-        }
         Temp = Temp->Next;
     }
     cout << endl;
@@ -254,7 +259,19 @@ void BigNum::Delete() {
 int BigNum::Size(){
     return Count;
 }
-
+/**
+ * Public Empty
+ * 
+ *  checks if empty
+ * 
+ * @Params:
+ * 
+ *     none
+ * 
+ * @Returns:
+ * 
+ *     bool
+ */
 bool BigNum::Empty(){
   return ((!Head) && (!Tail));
 }
@@ -276,27 +293,45 @@ void BigNum::RevPrint() {
 
     while (Temp) {
         cout << Temp->data;
-        if (Temp->Prev) {
-            cout << "->";
-        }
         Temp = Temp->Prev;
     }
     cout << endl;
 }
-
+/**
+ * Public Outfile
+ * 
+ *  Prints the BigNum to an outfile
+ * 
+ * @Params:
+ * 
+ *     Void
+ * 
+ * @Returns:
+ * 
+ *     void
+ */
 void BigNum::Outfile(){
     Node *Temp = Head;
-
+    fout << "Answer:\n\n";
     while (Temp) {
         fout << Temp->data;
-        if (Temp->Next) {
-           // cout << "->";
-        }
         Temp = Temp->Next;
     }
-    fout << endl;
+    fout << endl << endl;
 }
-
+/**
+ * Public Add
+ * 
+ *  adds two BigNums together and returns the result as a 
+ *  new BigNum pointer
+ * @Params:
+ * 
+ *     BigNum x (top number), BigNum y (bottom number)
+ * 
+ * @Returns:
+ * 
+ *     Bignum* Result
+ */
 BigNum* BigNum::Add(BigNum x, BigNum y){
     BigNum* xx = new BigNum(x);   
     BigNum* yy = new BigNum(y);
@@ -313,7 +348,6 @@ BigNum* BigNum::Add(BigNum x, BigNum y){
           sum = Temp1->data + Temp2->data + carry;
           carry = sum / 10;
           sum = sum % 10;
-          cout<<Temp1->data<<" "<<Temp2->data<<" "<<sum<<" "<<carry<<endl;
           Result->InsertFront(sum);
           Temp1 = Temp1->Prev;
           Temp2 = Temp2->Prev;
@@ -323,21 +357,31 @@ BigNum* BigNum::Add(BigNum x, BigNum y){
         while(!xx->Empty()){
             sum = Temp1->data;
             Result->InsertFront(sum);
-            cout<<Temp1->data<<" "<<sum<<" \n";
             Temp1 = Temp1->Prev;
             xx->Delete();
         }
         while(!yy->Empty()){
             sum = Temp2->data;
             Result->InsertFront(sum);  
-            cout<<Temp2->data<<" "<<sum<<" \n";
             Temp2 = Temp2->Prev;  
             yy->Delete();       
         }
         // handle carry + rest of nums
         return Result;
 }
-
+/**
+ * Public Sub
+ * 
+ *  subtracts the bottom BigNum from the top and returns
+ *  answer as a new BigNum*
+ * @Params:
+ * 
+ *     BigNum x (top number), BigNum y (bottom number)
+ * 
+ * @Returns:
+ * 
+ *     Bignum* Result
+ */
 BigNum* BigNum::Sub(BigNum x, BigNum y){
     BigNum* xx = new BigNum(x);   
     BigNum* yy = new BigNum(y);
@@ -355,7 +399,6 @@ BigNum* BigNum::Sub(BigNum x, BigNum y){
           Temp1->data = Temp1->data + 10;  
          }
           sub = Temp1->data - Temp2->data;
-          cout<<Temp1->data<<" "<<Temp2->data<<" "<<sub<<" "<<endl;
           Result->InsertFront(sub);
           Temp1 = Temp1->Prev;
           Temp2 = Temp2->Prev;
@@ -365,64 +408,75 @@ BigNum* BigNum::Sub(BigNum x, BigNum y){
         while(!xx->Empty()){
             sub = Temp1->data;
             Result->InsertFront(sub);
-            cout<<Temp1->data<<" "<<sub<<" \n";
             Temp1 = Temp1->Prev;
             xx->Delete();
         }
-        // handle carry + rest of nums
         return Result;
 }
-
+/**
+ * Public Mul
+ * 
+ *  multiplies two BigNums together and returns the result as a 
+ *  new BigNum pointer
+ * @Params:
+ * 
+ *     BigNum x (top number), BigNum y (bottom number)
+ * 
+ * @Returns:
+ * 
+ *     Bignum* Result
+ */
 BigNum* BigNum::Mul(BigNum x, BigNum y){
      
     BigNum* yy = new BigNum(y);
     BigNum* Result = new BigNum();
-    BigNum* add = new BigNum();
-    Node* hold = add->Tail;
+//my attempt at something that would hold the prod for each row and then add   
+    //BigNum* add = new BigNum();  //obviously it didn't work
+   // Node* hold = add->Tail;
     Node* Temp2 = yy->Tail;
     
     int carry=0;
     int prod=0;
-    cout << "fuck";
         while(!yy->Empty()){ //how to go through both until the end? Count????
         BigNum* xx = new BigNum(x); 
           Node* Temp1 = xx->Tail; 
-          cout << "fuck";
             while(!xx->Empty()){
-            cout << "fuck";
             prod = Temp2->data * Temp1->data + carry;
             carry = prod / 10;
             prod = prod % 10;
-            cout<<Temp1->data<<" "<<Temp2->data<<" "<<prod<<" "<<carry<<endl;
             Temp1 = Temp1->Prev;
-            hold->data += prod;
-            hold = hold->Prev;
-            xx->Delete();
-            if(xx->Empty()){
+           // hold->data += prod; //I left all the hold stuff in here because
+           // hold = hold->Prev;  //either I was close, or I should just change
+            xx->Delete();         //my major back to mass comm
+          /*  if(xx->Empty()){
                 hold->data += carry;
+            }*/
             }
-            }
-            hold = add->Tail;
+           // hold = add->Tail;
+        Result->InsertFront(prod);
           Temp2 = Temp2->Prev;
           yy->Delete();
         }
-        cout << "fuck";
+       
        /* while(!add->Empty()){
         Result->InsertFront(hold->data);
         hold = hold->Prev;
         add->Delete();
-        cout << "fuck";
         }   */
-        cout << "fuck";
-        // handle carry + rest of nums
         return Result;
 }
-
+/**
+ * Main
+ * 
+ *  hey, it's ya boi, main, it has some variables, like the BigNums,
+ *  and the loop that I use to traverse the file
+ *  
+ */
 int main(){
 fout << "Paige Champagne\n";
 fout << "Program 3\n";
 fout << "Arbitrary Precision Math\n\n";
-BigNum* r;
+
 ifstream fin ("input_data.txt");
 int count;
 char op;
@@ -431,29 +485,30 @@ string n2;
 
 fin >>count;
 
-//for(int i = 0; i < count; i++){
-
-//BigNum q;   
+for(int i = 1; i <= count; i++){  
 fin >>op>>n1>>n2;
+BigNum* r;
 BigNum p(n1);
 BigNum q(n2);
-//p.InsertBack(n1);
-p.Print();
-q.Print();
-r = p.Mul(p, q);
-r->Print();
-//r = p.Add(p, q);
+fout << "Operation " << i << ": ";
+switch(op){
+    case '+':
+        fout << "Addition\n";
+        r = p.Add(p, q);
+        r->Outfile();
+        break;
+    case '-':
+        fout << "Subtraction\n";
+        r = p.Sub(p, q);
+        r->Outfile();
+        break;
+    case '*':
+        fout << "Multiplication\n";
+        r = p.Mul(p, q);
+        r->Outfile();
+        break;
+}
 
-//cout << n1 <<endl<<endl;
-//r = p.Sub(p, q);
-//r->Print();
-//p.Outfile();
-
-//q.InsertBack(n2);
-//q.Print();
-//q.Outfile();
-//cout << n2 <<endl<<endl;
-//}
-
+}
 return 0;
 }
