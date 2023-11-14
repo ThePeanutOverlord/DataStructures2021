@@ -1,5 +1,1 @@
-![my image](IMG_20180716_232517_164.jpg)
-
-Paige Champagne
-paigechamp@gmail.com
-
+Repo for CMPS-1063 : Data Structures and ADT
